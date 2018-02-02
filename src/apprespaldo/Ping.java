@@ -5,18 +5,27 @@
  */
 package apprespaldo;
 
-/**
- *
- * @author cardenasm
- */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 
+/**Esta clase se encarga de realizar un ping a los dispositivos de la red y comprueba si
+están o no conectados
+@author grupo1
+@version 1.0*/
 public class Ping {
-    
- public Ping(){}
+private String address;
 
+/**Constructor de la clase
+ @param address Direccion ip del equipo*/    
+ public Ping(String address_){
+ this.address=address_;}
+
+ 
+ /**Esta funcion ejecuta el comando "ping + ipAddress" y muestra por pantalla los resultados 
+  * que se obtienen al correr el comando.
+  * @param command Comando que se desea que se ejecute (ping + direccion_ip)
+  */
   public  void runSystemCommand(String command) {
 
 		try {
@@ -36,7 +45,11 @@ public class Ping {
 		}
 	}
   
-  public boolean isReachable(String address) {
+  
+  /**Esta funcion determina si una direccion ip es alcanzable
+   @return Un valor booleno, yes si el dispositivo fue alcanzado, no
+   si no se pudo alcanzar*/
+  public boolean isReachable() {
       boolean isReachable=true;  
       try {
             InetAddress inetAddress = InetAddress.getByName(address);
@@ -49,12 +62,4 @@ public class Ping {
         
        
     }
-
-	/*public static void main(String[] args) {
-		
-		String ip = "192.168.1.235";
-		runSystemCommand("ping " + ip);
-
-	
-	}*/
 }

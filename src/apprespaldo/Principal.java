@@ -10,20 +10,19 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author cardenasm
+ * Esta clase contiene la interfaz gráfica de la pantalla principal
+ * de nuestra aplicación. Permite escoger el tipo de dispositivo del que
+ * se desea hacer respaldo
+ *@autor grupo2
+ * @version 1.0
  */
 public class Principal extends javax.swing.JFrame {
-   
-    //ClienteFTP cliente;
-    /**
-     * Creates new form Principal
-     */
+       Ping ping;
+    
     public Principal() {
         initComponents();
         //cliente = new ClienteFTP();
         this.setLocationRelativeTo(null);
-        
     }
 
     /**
@@ -52,6 +51,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         bt_salir = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        bt_respaldar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -188,6 +188,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         bt_minimizar.setBackground(new java.awt.Color(102, 102, 255));
+        bt_minimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bt_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_minimizarMouseClicked(evt);
@@ -212,6 +213,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         bt_salir.setBackground(new java.awt.Color(102, 102, 255));
+        bt_salir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bt_salir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_salirMouseClicked(evt);
@@ -235,6 +237,18 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jLabel14)
         );
 
+        bt_respaldar.setBackground(new java.awt.Color(102, 255, 102));
+        bt_respaldar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        bt_respaldar.setText("Respaldar");
+        bt_respaldar.setAutoscrolls(true);
+        bt_respaldar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_respaldar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_respaldar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_respaldarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -246,8 +260,8 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(57, 57, 57)
                         .addComponent(bt_router, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 94, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(bt_minimizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,11 +272,13 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(41, 41, 41))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(74, 74, 74))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addGap(110, 110, 110))))
+                                .addGap(74, 74, 74))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(110, 110, 110))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(bt_respaldar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,6 +294,8 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(bt_swtich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addComponent(bt_respaldar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,20 +316,18 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**boton que permite acceder a una nueva ventana donde se muesran los routers de la red*/
     private void bt_routerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_routerMouseClicked
         // TODO add your handling code here:
          MenuRouter menu_r= new MenuRouter();
          menu_r.setVisible(true);
          menu_r.pack();
          menu_r.setLocationRelativeTo(null);
-         this.dispose();
-         
-        
-        
-      
-         
+         this.dispose();   
     }//GEN-LAST:event_bt_routerMouseClicked
 
+    /**Funcion del boton switch que permite vizualizar una nueva ventana con los
+     switches de la red*/
     private void bt_swtichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_swtichMouseClicked
         // TODO add your handling code here:
          MenuSwitch menu_s= new MenuSwitch();
@@ -320,16 +336,47 @@ public class Principal extends javax.swing.JFrame {
          menu_s.setLocationRelativeTo(null);
          this.dispose();
     }//GEN-LAST:event_bt_swtichMouseClicked
-
+     /**Funcion del boton sali, permite cerrar la aplicación*/
     private void bt_salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_salirMouseClicked
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_bt_salirMouseClicked
 
+    //Boton que permite minimizar la aplciacion
     private void bt_minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_minimizarMouseClicked
         // TODO add your handling code here:
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_bt_minimizarMouseClicked
+
+    //Boton que realiza el respaldo de los dispositivos intermedios
+    private void bt_respaldarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_respaldarActionPerformed
+        // Instancias a objetos tipo telnet, con direccion io, hostname y directorio
+        Telnet telnet1 = new Telnet("192.168.1.2","SW1","SW1");
+        Telnet telnet2 = new Telnet("192.168.1.1","GYE","R-GYE");
+        Telnet telnet3 = new Telnet("192.168.2.1","UIO","R-UIO");
+        Telnet telnet4 = new Telnet("192.168.1.2","CUE","R-CUE");
+        
+        //se realiza un ping al router GYE para determinar si esta conectado
+        ping = new Ping("192.168.1.1");
+        if (!ping.isReachable()){
+            JOptionPane.showMessageDialog(this, "El router R-GYE está desconectado");
+        }
+        //se realiza un ping al router Quito para determinar si esta conectado
+        ping = new Ping("192.168.2.1");
+        if (!ping.isReachable()){
+            JOptionPane.showMessageDialog(this, "El router R-UIO está desconectado");
+        }
+        //se realiza un ping al router Cuenca para determinar si esta conectado
+        ping = new Ping("192.168.3.1");
+        if (!ping.isReachable()){
+            JOptionPane.showMessageDialog(this, "El router R-CUE está desconectado");
+        }
+        //se realiza un ping al switch SW1 para determinar si esta conectado
+         ping = new Ping("192.168.1.2");
+        if (!ping.isReachable()){
+            JOptionPane.showMessageDialog(this, "El switch SW1 está desconectado");
+        }
+    }//GEN-LAST:event_bt_respaldarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -368,6 +415,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bt_minimizar;
+    private javax.swing.JButton bt_respaldar;
     private javax.swing.JPanel bt_router;
     private javax.swing.JPanel bt_salir;
     private javax.swing.JPanel bt_swtich;

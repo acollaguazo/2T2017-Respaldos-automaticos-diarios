@@ -9,12 +9,14 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author cardenasm
+ * Esta clase contieene el codigo de interfaz grafica de la ventana que muestra
+ * el menu de los switches
+ * @author grupo2
+ * @version 1.0
  */
 public class MenuSwitch extends javax.swing.JFrame {
     ClienteFTP cliente;
-    Ping ping;
+    //Ping ping;
     DefaultListModel lista1,lista2,lista3;
     /**
      * Creates new form MenuSwitch
@@ -23,7 +25,6 @@ public class MenuSwitch extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         cliente = new ClienteFTP();
-        ping=new Ping();
         lista1 = new DefaultListModel();
     }
 
@@ -190,7 +191,7 @@ public class MenuSwitch extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**Este boton permite regresar el menu principal de la aplicacion*/
     private void bt_atrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_atrasMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
@@ -198,10 +199,14 @@ public class MenuSwitch extends javax.swing.JFrame {
         menu.setVisible(true);
     }//GEN-LAST:event_bt_atrasMouseClicked
 
+    /**Muestra la lista de los archivos de configuacion respaldados del
+     * switch SW1
+     */
     private void bt_sw1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_sw1MouseClicked
-        if (!ping.isReachable("192.168.1.2")){
-            JOptionPane.showMessageDialog(this, "El switch SW1 está desconectado");
-        }
+//        ping = new Ping("192.168.1.2");
+//        if (!ping.isReachable()){
+//            JOptionPane.showMessageDialog(this, "El switch SW1 está desconectado");
+//        }
         cliente.changeDirectorio("\\SW1");
         if(lista1.isEmpty()){
             cliente.llenarLista(lista1);
@@ -211,7 +216,9 @@ public class MenuSwitch extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_bt_sw1MouseClicked
-
+    
+    /**Este boton permite descargar un archivo seleccionado en la lista de 
+     archivos de configuracion asociada a un dispositivo*/
     private void bt_descargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_descargarMouseClicked
         String archivo = this.jList1.getSelectedValue();
         this.cliente.desrcargarArchivoFTP(archivo);

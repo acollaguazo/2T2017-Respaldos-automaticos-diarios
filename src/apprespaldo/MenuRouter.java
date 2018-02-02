@@ -9,22 +9,24 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author cardenasm
+ * Esta clase contieene el codigo de interfaz grafica de la ventana que muestra
+ * el menu de los routers
+ * @author grupo2
+ * @version 1.0
  */
 public class MenuRouter extends javax.swing.JFrame {
     ClienteFTP cliente;
     DefaultListModel lista1,lista2,lista3;
-    Ping ping;
+    //Ping ping;
 
     /**
-     * Creates new form RouterMenu
+     * Creates new form MenuRouter
      */
     public MenuRouter() {
         initComponents();
         this.setLocationRelativeTo(null);
         cliente = new ClienteFTP();
-        ping = new Ping();
+            
         lista1 = new DefaultListModel();
         lista2 = new DefaultListModel();
         lista3 = new DefaultListModel();
@@ -276,11 +278,12 @@ public class MenuRouter extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**Muestra la lista de los archivos de configuacion respaldados del
+     * router R-GYE
+     */
     private void bt_rgyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_rgyeMouseClicked
-        if (!ping.isReachable("192.168.1.1")){
-            JOptionPane.showMessageDialog(this, "El router R-GYE está desconectado");
-        }
-        cliente.changeDirectorio("\\R-GYE");
+        
+        cliente.changeDirectorio("//Documentos/R-GYE");
         if(lista1.isEmpty()){
             cliente.llenarLista(lista1);
             this.jList1.setModel(lista1);
@@ -289,13 +292,17 @@ public class MenuRouter extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_bt_rgyeMouseClicked
-
+    
+    /**Muestra la lista de los archivos de configuacion respaldados del
+     * router R-UIO
+     */
     private void bt_rquitoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_rquitoMouseClicked
         // TODO add your handling code here:
-        if (!ping.isReachable("192.168.2.1")){
-            JOptionPane.showMessageDialog(this, "El router R-UIO está desconectado");
-        }
-        cliente.changeDirectorio("\\R-UIO");
+//         ping = new Ping("192.168.2.1");
+//        if (!ping.isReachable()){
+//            JOptionPane.showMessageDialog(this, "El router R-UIO está desconectado");
+//        }
+        cliente.changeDirectorio("//Público/Respaldos/R-UIO");
         if(lista2.isEmpty()){
             cliente.llenarLista(lista2);
             this.jList1.setModel(lista2);
@@ -304,25 +311,32 @@ public class MenuRouter extends javax.swing.JFrame {
         
     }//GEN-LAST:event_bt_rquitoMouseClicked
 
+    /**Muestra la lista de los archivos de configuacion respaldados del
+     * router R-CUE
+     */
     private void bt_rcuencaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_rcuencaMouseClicked
         // TODO add your handling code here:
-        if (!ping.isReachable("192.168.3.1")){
-            JOptionPane.showMessageDialog(this, "El router R-CUE está desconectado");
-        }
-        cliente.changeDirectorio("\\R-CUE");
+//        ping = new Ping("192.168.3.1");
+//        if (!ping.isReachable()){
+//            JOptionPane.showMessageDialog(this, "El router R-CUE está desconectado");
+//        }
+        cliente.changeDirectorio("//Público/Respaldos/R-CUE");
         if(lista3.isEmpty()){
             cliente.llenarLista(lista3);
             this.jList1.setModel(lista3);
         }else{
             this.jList1.setModel(lista3);}
     }//GEN-LAST:event_bt_rcuencaMouseClicked
-
+    
+    /**Este boton permite descargar un archivo seleccionado en la lista de 
+     archivos de configuracion asociada a un dispositivo*/
     private void bt_descargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_descargarMouseClicked
         String archivo = this.jList1.getSelectedValue();
         this.cliente.desrcargarArchivoFTP(archivo);
         JOptionPane.showMessageDialog(this, "La descarga se realizó con éxito");
     }//GEN-LAST:event_bt_descargarMouseClicked
 
+    /**Este boton permite regresar el menu principal de la aplicacion*/
     private void bt_atrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_atrasMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);

@@ -9,11 +9,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
- * Clase Ventana
+ * Clase AppRespaldo
  * Muestra la estructuta que deberia tener una Ventana en Java con la libreria
- * Swing, contiene una etiqueta, un caja de texto y un boton, que tiene la
- * accion de mostrar el texto en la caja por una ventana de mensaje.
- * @author Daniel Alvarez (a3dany)
+ * Swing, instancia la ventana Principal.
+ * @author grupo2
+ * @version  1.0
  */
 public class AppRespaldo extends JFrame implements ActionListener {
 
